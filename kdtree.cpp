@@ -1,4 +1,4 @@
-// Last Update:2018-11-30 18:28:27
+// Last Update:2018-12-01 11:02:03
 /**
  * @file kdtree.cpp
  * @brief
@@ -145,7 +145,8 @@ KdNode *KdTree::Build(std::vector<Kdata> &datas, int start, int size)
 
     if (start == (int)(datas.size() - 1) || size <= 1)
     {
-        tmpNode->data = datas[start];
+        //tmpNode->data = datas[start];
+        std::swap(tmpNode->data, datas[start]);
         tmpNode->dirIndex = s_compareIndex.row * s_compareIndex.col;
         tmpNode->trainIdx = start;
         return tmpNode;
@@ -162,7 +163,8 @@ KdNode *KdTree::Build(std::vector<Kdata> &datas, int start, int size)
 
     // Determine a point to divide
     int median = start + (size / 2);
-    tmpNode->data = datas[median];
+    //tmpNode->data = datas[median];
+    std::swap(tmpNode->data, datas[median]);
     tmpNode->trainIdx = median;
 
     // Create left node
@@ -184,6 +186,7 @@ void KdTree::Train()
 {
     s_compareIndex.row = s_compareIndex.col = 0;
     root = Build(rawData, 0, rawData.size());
+    rawData.clear();
 }
 
 void KdTree::Print(const KdNode *node, int level)
