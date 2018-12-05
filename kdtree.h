@@ -57,7 +57,7 @@ public:
     void Add(const Kdata &data);
     void Train();
     void Print();
-    void PrintData(const Kdata *data);
+    void PrintData(const Kdata &data);
     bool NearestSearch(const struct Kdata &target, struct Kdata *out, double *distance);
     void Knearest(const Kdata &query, const int k, std::vector<struct Match> *matchs);
 

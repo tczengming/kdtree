@@ -32,7 +32,7 @@ main( int argc, char **argv )
     if (tree.NearestSearch(data, &nearest, &dist))
     {
         printf( "dist;%lf\n", dist );
-        tree.PrintData(&nearest);
+        tree.PrintData(nearest);
     }
 
     std::vector<struct Match> matchs;

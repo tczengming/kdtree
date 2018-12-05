@@ -1,4 +1,4 @@
-// Last Update:2018-12-05 18:13:25
+// Last Update:2018-12-05 18:26:26
 /**
  * @file kdtree.cpp
  * @brief
@@ -127,14 +127,14 @@ KdTree::~KdTree()
     tmpTrainData.clear();
 }
 
-void KdTree::PrintData(const Kdata *data)
+void KdTree::PrintData(const Kdata &data)
 {
     printf("[ ");
-    for ( int r = 0; r < data->rows; ++r )
+    for ( int r = 0; r < data.rows; ++r )
     {
-        for ( int c = 0; c < data->cols; ++c )
+        for ( int c = 0; c < data.cols; ++c )
         {
-            printf(" %f,", data->ptr[r*c + c]);
+            printf(" %f,", data.ptr[r*data.cols + c]);
         }
     }
     printf(" ] \n");
@@ -293,13 +293,8 @@ void KdTree::Print(const KdNode *node, int level)
     else
         return;
 
-    printf("level %d [ ", level);
-    for ( int r = rowStart; r < rowStart+rowCount; ++r )
-    {
-        for ( int c = 0; c < mergeData.cols; ++c )
-            printf(" %f,", mergeData.ptr[r*mergeData.cols + c]);
-    }
-    printf(" ]\n");
+    printf("level ", level);
+    PrintData(GetData(*node));
 
     if (node->left == NULL && node->right == NULL)
         return;
@@ -321,7 +316,7 @@ static double Distance(const Kdata &a, const Kdata &b)
     {
         for ( int c = 0; c < a.cols; ++c )
         {
-            ret += powl(b.ptr[r*a.cols + c] - a.ptr[r*a.cols + c], 2);
+            ret += powl(b.ptr[r*b.cols + c] - a.ptr[r*a.cols + c], 2);
         }
     }
 
