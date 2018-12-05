@@ -1,4 +1,4 @@
-// Last Update:2018-11-30 17:50:17
+// Last Update:2018-12-05 16:52:30
 /**
  * @file test.cpp
  * @brief
@@ -33,6 +33,13 @@ main( int argc, char **argv )
     {
         printf( "dist;%lf\n", dist );
         tree.PrintData(&nearest);
+    }
+
+    std::vector<struct Match> matchs;
+    tree.Knearest(data, 2, &matchs);
+    for ( int i = 0; i < matchs.size(); ++i )
+    {
+        printf( "i %d imgidx;%d trainidx:%d distance:%f\n", i, matchs[i].imgIdx, matchs[i].trainIdx, matchs[i].distance );
     }
 
     return 0;
