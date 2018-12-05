@@ -131,7 +131,7 @@ void KdTree::PrintData(const Kdata *data)
     {
         for ( int c = 0; c < data->cols; ++c )
         {
-            printf(" %f,", data->ptr[r*c + c]);
+            printf(" %f,", data->ptr[r*data->cols + c]);
         }
     }
     printf(" ] \n");
@@ -196,7 +196,7 @@ void KdTree::Print(const KdNode *node, int level)
     {
         for ( int c = 0; c < node->data.cols; ++c )
         {
-            printf(" %f,", node->data.ptr[r*c + c]);
+            printf(" %f,", node->data.ptr[r*node->data.cols + c]);
         }
     }
     printf(" ] ");
@@ -223,7 +223,7 @@ static double Distance(const Kdata &a, const Kdata &b)
     {
         for ( int c = 0; c < a.cols; ++c )
         {
-            ret += powl(b.ptr[r*c + c] - a.ptr[r*c + c], 2);
+            ret += powl(b.ptr[r*b.cols + c] - a.ptr[r*a.cols + c], 2);
         }
     }
 
