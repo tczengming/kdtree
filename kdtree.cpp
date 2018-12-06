@@ -30,7 +30,7 @@ Kdata::Kdata()
 
 Kdata::Kdata(float *buf, int row, int col)
 {
-    ptr = new float[row * col];
+    ptr = (float*)malloc(row * col * sizeof(float));
     rows = row;
     cols = col;
 
@@ -68,7 +68,7 @@ Kdata & Kdata::operator= (const Kdata &r)
 
     if (ptr)
     {
-        delete [] ptr;
+        free(ptr);
         ptr = NULL;
     }
 
@@ -239,6 +239,7 @@ void KdTree::Train()
     mergeData.rows = 0;
     free(mergeData.ptr);
     mergeData.ptr = NULL;
+    imgStart.clear();
 
     if (tmpTrainData.empty())
         return;
